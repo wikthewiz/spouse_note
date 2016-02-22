@@ -1,0 +1,69 @@
+<!--
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0099cc"
+    tools:context="com.wikthewiz.spouse_note.FullscreenNoteActivity">
+    -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/black_overlay"
+        android:orientation="vertical"
+        tools:context="com.wikthewiz.spouse_note.FullscreenNoteActivity">
+
+
+
+    <LinearLayout
+        android:id="@+id/buttons_container"
+        style="?metaButtonBarStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:background="@color/black_overlay"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:gravity="top" >
+
+        <Button
+            android:id="@+id/publish_button"
+            style="?metaButtonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/publish_button"
+            android:onClick="onPublishClick"
+            android:visibility="visible"/>
+
+        <Button
+            android:id="@+id/cancel_button"
+            style="?metaButtonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            android:onClick="onCancelClick"
+            android:visibility="visible"/>
+
+            </LinearLayout>
+
+            <!-- The primary full-screen view. This can be replaced with whatever view
+                 is needed to present your content, e.g. VideoView, SurfaceView,
+                 TextureView, etc. -->
+
+    <EditText
+        android:id="@+id/fullscreen_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:keepScreenOn="true"
+        android:hint="@string/ghost_content"
+        android:textColorHint="#33b5e5"
+        android:textColor="#00001a"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:visibility="visible" />
+    </LinearLayout>
