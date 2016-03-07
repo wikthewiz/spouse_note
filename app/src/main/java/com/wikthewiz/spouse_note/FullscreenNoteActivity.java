@@ -44,7 +44,6 @@ public class FullscreenNoteActivity extends Activity {
     private final Handler mHideHandler = new Handler();
     private EditText mTextEditor;
     private Button publishButton;
-    private Button cancelButton;
 
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
@@ -102,11 +101,11 @@ public class FullscreenNoteActivity extends Activity {
         }
     };
 
-    private void onPublishClick(View view) {
+    public void onPublishClick(View view) {
         saveLocalNotes(mCurrentText, this);
         mCurrentText = this.mTextEditor.getText().toString();
     }
-    private void onCancelClick(View view) {
+    public void onCancelClick(View view) {
         if(mCurrentText.equals(mTextEditor.getText().toString())){
            return;
         }
@@ -122,15 +121,7 @@ public class FullscreenNoteActivity extends Activity {
         mButtonsContainer = findViewById(R.id.buttons_container);
         mTextEditor = (EditText)findViewById(R.id.fullscreen_content);
         publishButton = (Button)findViewById(R.id.publish_button);
-        cancelButton = (Button)findViewById(R.id.cancel_button);
-        setBigText();
-        // Set up the user interaction to manually show or hide the system UI.
-        mTextEditor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggle();
-            }
-        });
+        Button  cancelButton = (Button)findViewById(R.id.cancel_button);
 
         mCurrentText = loadLocalNotes(this);
         mTextEditor.setText(mCurrentText);
@@ -139,6 +130,16 @@ public class FullscreenNoteActivity extends Activity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.publish_button).setOnTouchListener(mDelayHideTouchListener);
+
+        setSmallText();
+        setBigText();
+        // Set up the user interaction to manually show or hide the system UI.
+        mTextEditor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toggle();
+            }
+        });
     }
 
     private String loadTextFromServer() {
@@ -148,7 +149,7 @@ public class FullscreenNoteActivity extends Activity {
     private static void saveLocalNotes(String notes, Activity a) {
         PrintWriter writer = null;
         try {
-            writer = new PrintWriter(a.openFileOutput(getStorageFile(a), MODE_PRIVATE));
+            writer = new PrintWriter(a.openFileOutput(getFileName(), MODE_PRIVATE));
             writer.write(notes);
             writer.flush();
         } catch (IOException e){
@@ -222,6 +223,7 @@ public class FullscreenNoteActivity extends Activity {
             setBigText();
             hideKeyboard();
             hide();
+            publishButton.requestFocus();
         }
     }
 
